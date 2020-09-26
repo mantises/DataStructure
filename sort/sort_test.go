@@ -46,3 +46,13 @@ func TestQuickSort(t *testing.T) {
 	QuickSort(nums)
 	fmt.Println(nums)
 }
+
+func TestMergeSort(t *testing.T) {
+	var nums []int
+	rand.Seed(time.Now().UnixNano())
+	for i := 0; i < 10; i++ {
+		nums = append(nums, rand.Intn(200))
+	}
+	nums = MergeSort(nums)
+	fmt.Println(nums)
+}

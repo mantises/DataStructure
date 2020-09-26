@@ -1,5 +1,7 @@
 package sort
 
+import "fmt"
+
 // 冒泡排序
 // 基本思路：比较相邻的两个元素，若逆序，则交换。对于每轮遍历，若没有发生遍历，则表明数组已有序
 // 时间复杂度：o(N^2)
@@ -110,8 +112,43 @@ func ShellSort(nums []int) {
 }
 
 // 归并排序
-func MergeSort(nums []int) {
+// 基本思路：利用归并的思想实现的排序方法，该算法采用经典的分治（divide-and-conquer）策略。
+// 分治法将问题分(divide)成一些小的问题然后递归求解，而治(conquer)的阶段则将分的阶段得到的
+// 各答案"修补"在一起，即分而治之)。
+// 时间复杂度：o(N*logN)，
+// 空间复杂度：o(n)
+// 是否稳定：是
+func MergeSort(nums []int) []int {
+	return mergeSort(nums)
+}
 
+func mergeSort(nums []int) []int {
+	fmt.Println("divide", nums)
+	if len(nums) == 1 {
+		return nums
+	}
+	mid := len(nums) / 2
+	left := mergeSort(nums[:mid])
+	right := mergeSort(nums[mid:])
+	return merge(left, right)
+}
+
+func merge(nums1, nums2 []int) []int {
+	var tmp []int
+	l1, l2 := 0, 0
+	for l1 < len(nums1) && l2 < len(nums2) {
+		if nums1[l1] <= nums2[l2] {
+			tmp = append(tmp, nums1[l1])
+			l1++
+		} else {
+			tmp = append(tmp, nums2[l2])
+			l2++
+		}
+	}
+	tmp = append(tmp, nums1[l1:]...)
+	tmp = append(tmp, nums2[l2:]...)
+	fmt.Println("merge", tmp)
+	return tmp
 }
 
 // 堆排序
