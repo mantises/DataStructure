@@ -1,7 +1,5 @@
 package sort
 
-import "fmt"
-
 // 冒泡排序
 // 基本思路：比较相邻的两个元素，若逆序，则交换。对于每轮遍历，若没有发生遍历，则表明数组已有序
 // 时间复杂度：o(N^2)
@@ -123,7 +121,6 @@ func MergeSort(nums []int) []int {
 }
 
 func mergeSort(nums []int) []int {
-	fmt.Println("divide", nums)
 	if len(nums) == 1 {
 		return nums
 	}
@@ -147,7 +144,6 @@ func merge(nums1, nums2 []int) []int {
 	}
 	tmp = append(tmp, nums1[l1:]...)
 	tmp = append(tmp, nums2[l2:]...)
-	fmt.Println("merge", tmp)
 	return tmp
 }
 
