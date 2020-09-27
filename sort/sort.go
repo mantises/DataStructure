@@ -29,7 +29,7 @@ func BubbleSort(nums []int) {
 // 时间复杂度：o(N^2)
 // 空间复杂度：o(1)
 // 最差情况：N(N-1)/2 次，即数组为逆序
-// 最好情况：n-1 次，即数组已是有序
+// 最好情况：N-1 次，即数组已是有序
 // 是否稳定：是
 func InsertSort(nums []int) {
 	for i := 1; i < len(nums); i++ {
@@ -114,7 +114,7 @@ func ShellSort(nums []int) {
 // 分治法将问题分(divide)成一些小的问题然后递归求解，而治(conquer)的阶段则将分的阶段得到的
 // 各答案"修补"在一起，即分而治之)。
 // 时间复杂度：o(N*logN)，
-// 空间复杂度：o(n)
+// 空间复杂度：o(N)
 // 是否稳定：是
 func MergeSort(nums []int) []int {
 	return mergeSort(nums)
@@ -148,6 +148,36 @@ func merge(nums1, nums2 []int) []int {
 }
 
 // 堆排序
+// 基本思路：将待排序序列构造成一个大顶堆，此时整个数组的最大值就是堆顶的根节点。将其与末尾元素进行
+// 交换，此时末尾就为最大值。然后将剩余 N-1 个元素重新构造成一个大顶堆，这样会得到n个元素的次小值。
+// 如此反复执行，便能得到一个有序序列
+// 时间复杂度：o(N*logN)，
+// 空间复杂度：o(1)
+// 是否稳定：是
 func HeapSort(nums []int) {
+	for i := len(nums)/2 - 1; i >= 0; i-- {
+		adjustHeap(nums, i, len(nums))
+	}
+	for i := len(nums) - 1; i > 0; i-- {
+		nums[0], nums[i] = nums[i], nums[0]
+		adjustHeap(nums, 0, i)
+	}
+}
 
+func adjustHeap(nums []int, pos, length int) {
+	for {
+		child := pos*2 + 1
+		if child > length-1 {
+			break
+		}
+		if child < length-1 && nums[child+1] > nums[child] {
+			child++
+		}
+		if nums[pos] < nums[child] {
+			nums[pos], nums[child] = nums[child], nums[pos]
+			pos = child
+		} else {
+			break
+		}
+	}
 }
