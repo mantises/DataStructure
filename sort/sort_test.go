@@ -10,19 +10,21 @@ import (
 func TestBubbleSort(t *testing.T) {
 	var nums []int
 	rand.Seed(time.Now().UnixNano())
-	for i := 0; i < 30; i++ {
+	for i := 0; i < 10; i++ {
 		nums = append(nums, rand.Intn(200))
 	}
+	fmt.Println(nums)
 	BubbleSort(nums)
 	fmt.Println(nums)
 }
 
 func TestInsertSort(t *testing.T) {
 	var nums []int
-	rand.Seed(time.Now().UnixNano())
-	for i := 0; i < 30; i++ {
-		nums = append(nums, rand.Intn(200))
+	rand.Seed(time.Now().Unix())
+	for i := 0; i < 10; i++ {
+		nums = append(nums, rand.Intn(100)%(i+1))
 	}
+	fmt.Println(nums)
 	InsertSort(nums)
 	fmt.Println(nums)
 }
@@ -30,9 +32,10 @@ func TestInsertSort(t *testing.T) {
 func TestSelectSort(t *testing.T) {
 	var nums []int
 	rand.Seed(time.Now().UnixNano())
-	for i := 0; i < 30; i++ {
+	for i := 0; i < 10; i++ {
 		nums = append(nums, rand.Intn(200))
 	}
+	fmt.Println(nums)
 	SelectSort(nums)
 	fmt.Println(nums)
 }
@@ -40,9 +43,10 @@ func TestSelectSort(t *testing.T) {
 func TestQuickSort(t *testing.T) {
 	var nums []int
 	rand.Seed(time.Now().UnixNano())
-	for i := 0; i < 30; i++ {
+	for i := 0; i < 10; i++ {
 		nums = append(nums, rand.Intn(200))
 	}
+	fmt.Println(nums)
 	QuickSort(nums)
 	fmt.Println(nums)
 }
@@ -53,6 +57,7 @@ func TestMergeSort(t *testing.T) {
 	for i := 0; i < 10; i++ {
 		nums = append(nums, rand.Intn(200))
 	}
+	fmt.Println(nums)
 	nums = MergeSort(nums)
 	fmt.Println(nums)
 }
@@ -68,4 +73,13 @@ func TestHeapSort(t *testing.T) {
 	fmt.Println(nums)
 }
 
-
+func TestShellSort(t *testing.T) {
+	var nums []int
+	rand.Seed(time.Now().Unix())
+	for i := 0; i < 10; i++ {
+		nums = append(nums, rand.Intn(20)%(i+1))
+	}
+	fmt.Println(nums)
+	ShellSort(nums)
+	fmt.Println(nums)
+}
