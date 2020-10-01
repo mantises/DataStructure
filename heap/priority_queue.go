@@ -2,26 +2,26 @@ package heap
 
 type FuncCmp func(x interface{}, y interface{}) bool
 
-type Heap struct {
+type PriorityQueue struct {
 	val []interface{}
 	cmp FuncCmp
 }
 
-func NewHeap(cmp FuncCmp) Heap {
-	return Heap{
+func NewPriorityQueue(cmp FuncCmp) PriorityQueue {
+	return PriorityQueue{
 		val: make([]interface{}, 0, 0),
 		cmp: cmp,
 	}
 }
 
-func (h *Heap) Push(x interface{})  {
+func (h *PriorityQueue) Push(x interface{})  {
 	h.val = append(h.val, x)
 	for i := len(h.val)/2 - 1; i >= 0; i-- {
 		h.adjustHeap(h.val, i, len(h.val))
 	}
 }
 
-func (h *Heap) Pop() interface{} {
+func (h *PriorityQueue) Pop() interface{} {
 	if len(h.val) == 0 {
 		return nil
 	}
@@ -33,7 +33,7 @@ func (h *Heap) Pop() interface{} {
 	return ret
 }
 
-func (h *Heap) adjustHeap(nums []interface{}, pos, length int) {
+func (h *PriorityQueue) adjustHeap(nums []interface{}, pos, length int) {
 	for {
 		child := pos*2 + 1
 		if child > length-1 {
@@ -51,7 +51,7 @@ func (h *Heap) adjustHeap(nums []interface{}, pos, length int) {
 	}
 }
 
-func (h *Heap) Sort(nums []int) {
+func (h *PriorityQueue) Sort(nums []int) {
 	for i := len(nums) - 1; i > 0; i-- {
 		nums[0], nums[i] = nums[i], nums[0]
 		h.adjustHeap(h.val, 0, i)

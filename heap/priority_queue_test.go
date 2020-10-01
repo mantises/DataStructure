@@ -12,7 +12,7 @@ func TestNewHeap(t *testing.T) {
 		}
 		return false
 	}
-	h := NewHeap(f)
+	h := NewPriorityQueue(f)
 	h.Push(10)
 	h.Push(99)
 	h.Push(6)
