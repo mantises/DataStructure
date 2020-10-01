@@ -7,7 +7,7 @@ type Stack struct {
 }
 
 /** initialize your data structure here. */
-func Constructor() Stack {
+func NewStack() Stack {
 	return Stack{l: list.New()}
 }
 
@@ -31,10 +31,6 @@ func (s *Stack) Top() interface{} {
 	return nil
 }
 
-/**
- * Your Stack object will be instantiated and called as such:
- * obj := Constructor();
- * obj.Push(x);
- * obj.Pop();
- * param_3 := obj.Top();
- */
+func (s *Stack) Size() int {
+	return s.l.Len()
+}

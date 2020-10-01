@@ -6,7 +6,7 @@ import (
 )
 
 func TestStack(t *testing.T)  {
-	st := Constructor()
+	st := NewStack()
 	for i := 0 ; i < 10; i++ {
 		st.Push(i)
 	}
