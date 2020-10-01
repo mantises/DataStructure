@@ -1,9 +1,10 @@
 package list
 
 type Element struct {
-	next, prev *Element
-	list       *List
-	Value      interface{}
+	next  *Element
+	prev  *Element
+	list  *List
+	Value interface{}
 }
 
 func (e *Element) Next() *Element {
