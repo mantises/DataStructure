@@ -1,4 +1,4 @@
-package heap
+package priority_queue
 
 type FuncCmp func(x interface{}, y interface{}) bool
 
