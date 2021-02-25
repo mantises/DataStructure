@@ -8,17 +8,15 @@ package sort
 // 最好情况：N-1 次，数组已为有序，仅需一轮遍历即可
 // 是否稳定：是
 func BubbleSort(nums []int) {
-	for i := 0; i < len(nums)-1; i++ {
-		flag := false
-		for j := 0; j < len(nums)-1; j++ {
+	for i := 0; i < len(nums) - 1; i++ {
+		exchanged := false
+		for j := 0; j < len(nums) - 1 - i; j++ {
 			if nums[j] > nums[j+1] {
-				tmp := nums[j+1]
-				nums[j+1] = nums[j]
-				nums[j] = tmp
-				flag = true
+				nums[j], nums[j+1] = nums[j+1], nums[j]
+				exchanged = true
 			}
 		}
-		if !flag {
+		if !exchanged {
 			break
 		}
 	}
@@ -33,9 +31,11 @@ func BubbleSort(nums []int) {
 // 是否稳定：是
 func InsertSort(nums []int) {
 	for i := 1; i < len(nums); i++ {
-		for j := i; j >= 0 && nums[j] < nums[j-1]; j-- {
-			nums[j-1], nums[j] = nums[j], nums[j-1]
+		j, val := i, nums[i]
+		for ; j > 0 && nums[j-1] > val; j-- {
+			nums[j] = nums[j-1]
 		}
+		nums[j] = val
 	}
 }
 
@@ -47,17 +47,14 @@ func InsertSort(nums []int) {
 // 最好情况：o(N^2)
 // 是否稳定：否
 func SelectSort(nums []int) {
-	length := len(nums)
-	for i := 0; i < length-1; i++ {
-		max := 0
-		for j := 0; j < length-i; j++ {
-			if nums[max] < nums[j] {
-				max = j
+	for i := 0; i < len(nums) - 1; i++ {
+		maxIndex := len(nums)-1-i
+		for j := 0; j < len(nums) - 1 - i; j++ {
+			if nums[j] > nums[maxIndex] {
+				maxIndex = j
 			}
 		}
-		tmp := nums[length-i-1]
-		nums[length-i-1] = nums[max]
-		nums[max] = tmp
+		nums[len(nums)-1-i], nums[maxIndex] =  nums[maxIndex], nums[len(nums)-1-i]
 	}
 }
 
@@ -65,7 +62,7 @@ func SelectSort(nums []int) {
 // 基本思路：基于分治法。设置一个数为枢轴，在每轮递归中根据枢轴将数组分为两部分，左半部分小于枢轴，右半部分大于枢轴。
 //         将数组按枢轴左右两个子数组递归进行上述操作，每一次递归调用中都有一个元素都放在正确的位置，即枢轴。
 // 时间复杂度：平均时间复杂度为 o(N*logN)，最差时间复杂度为 o(N^2)
-// 空间复杂度：o(1)
+// 空间复杂度：平均空间复杂度是O(log(N))。最坏的情况是O(N)
 // 最差情况：由于是递归将数组分为两个子数组，若左右两个子数组越均匀，则只需 logN 次递归调用，即复杂度为 N*logN。
 //         数组已经有序（正序或者逆序），此时需要遍历 N 次，在递归中数组长度从 N 到 1。
 // 最好情况：数组分布均匀，只需 logN 次遍历

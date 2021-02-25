@@ -22,7 +22,7 @@ func TestInsertSort(t *testing.T) {
 	var nums []int
 	rand.Seed(time.Now().Unix())
 	for i := 0; i < 10; i++ {
-		nums = append(nums, rand.Intn(100)%(i+1))
+		nums = append(nums, rand.Intn(100))
 	}
 	fmt.Println(nums)
 	InsertSort(nums)
